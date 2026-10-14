@@ -5,6 +5,13 @@ if (!defined('WPINC')) {
     die;
 }
 
+ /**
+ * Register the Free admin menu only when Pro is not active.
+ */
+if ( function_exists( 'wceazy_pro_load_textdomain' )){
+    return;
+}
+
 if (!class_exists('WcEazyAdmin')) {
     class WcEazyAdmin
     {
@@ -41,8 +48,9 @@ if (!class_exists('WcEazyAdmin')) {
             $this->settings = new WcEazySettings($this);
             new WcEazyAdminAjax($this);
 
-            add_action("admin_menu", array($this, 'wceazy_admin_menu'));
-            add_action('admin_enqueue_scripts', array($this, 'wceazy_admin_enqueue'));
+
+            add_action( 'admin_menu',array( $this, 'wceazy_admin_menu' ) );
+            add_action( 'admin_enqueue_scripts', array($this, 'wceazy_admin_enqueue'));
             add_action( 'plugin_action_links_' . WCEAZY_BASE_PATH, array( $this, 'wceazy_action_links') );
             
             add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
@@ -148,6 +156,7 @@ if (!class_exists('WcEazyAdmin')) {
         
         function wceazy_admin_menu()
         {
+        
             $icon_url = WCEAZY_IMG_DIR . "wceazy_icon.svg";
             add_menu_page("wcEazy", "wcEazy", 'manage_options', "wceazy-dashboard", array($this, 'wceazy_admin_dashboard'), $icon_url, 6);
         }

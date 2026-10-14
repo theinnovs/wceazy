@@ -2052,7 +2052,7 @@ class TCPDFBarcode {
 			for ($bit_index = 0; $bit_index < 13; ++$bit_index) {
 				$bit_count += intval(($count & (1 << $bit_index)) != 0);
 			}
-			// if we don/t have the right number of bits on, go on to the next value
+			// if we do not have the right number of bits on, go on to the next value
 			if ($bit_count == $n) {
 				$reverse = ($this->imb_reverse_us($count) >> 3);
 				// if the reverse is less than count, we have already visited this pair before

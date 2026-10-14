@@ -1,10 +1,10 @@
 === wcEazy - Supercharge your WooCommerce Store ===
-Contributors: wceazy, wpcommerz, darklup, shahinsalehiin, devmahbub
+Contributors: wceazy, wpcommerz, darklup, shahinsalehiin, devmahbub, nftushar
 Donate link: https://wceazy.com
 Tags: woocommerce, bulk coupon generator, bogo deal, floating cart, url coupon
 Requires PHP: 5.6
 Requires at least: 5.1
-Tested up to: 6.4.2
+Tested up to: 6.4.4
 Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -324,7 +324,7 @@ With just one plugin, you can improve the flexibility of your WooCommerce websit
 	<li><strong>Enable Update Product Qty:</strong> Allows to show update product quantity on sticky bar.</li>
 	<li><strong>Show Product Image:</strong>Enable the feature if you want show product image on sticky bar.</li>
 	<li><strong>Show Stock Status:</strong>Using this feature show stock quantity on sticky bar.</li>
-	<li><strong>Hide Sticky Bar( Product Out of Stock ):</strong> Enable it if you don/t show sticky bar when product out of stock.</li>
+	<li><strong>Hide Sticky Bar( Product Out of Stock ):</strong> Enable it if you do not show sticky bar when product out of stock.</li>
 	<li><strong>Sticky Bar's Height:</strong> Set sticky bar height in pixel(Ex.150) - Default 100px.</li>
 	<li><strong>Product Image Shape:</strong>Select Product image shape between round and square.</li>
 	<li><strong>Product Title Color  (Pro):</strong>Select Color for product title.</li>
@@ -537,8 +537,9 @@ screenshot-9.png
 
 = 1.1.6 =
 1. Added: 100% translation ready
-2. Added: Provide translation for Chinese, Bangla, French (France), Japanese, Russian, and Spanish (Spain).
+2. Added: Provide translation for Chinese, Bangla, French (France), Japanese, Russian, German and Spanish (Spain).
 3. Fixed: Document link issue
+
 
 = 1.1.5 =
 1. Change documentation link 

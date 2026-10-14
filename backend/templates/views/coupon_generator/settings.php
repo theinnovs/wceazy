@@ -22,7 +22,7 @@
         <form class="wceazy_coupon_generator_form_for_reset_purpose">
             <div class="wceazy_coupon_generator_top_action">
                 <div class="wceazy_coupon_generator_field_group_flex wceazy_coupon_generator_prefix">
-                    <label  style="color: #FF521D;" ><?php esc_html_e('Prefix', 'wceazy'); ?> <span>(Pro)</span></label>
+                    <label  ><?php esc_html_e('Prefix', 'wceazy'); ?> <span style="color: #FF521D;" >(Pro)</span></label>
                     <input class="wceazy_coupon_generator_text_field" type="text" placeholder="<?php esc_attr_e('Coupon prefix', 'wceazy'); ?>" disabled>
                 </div>
 
@@ -32,7 +32,12 @@
                 </div>
 
                 <div class="wceazy_coupon_generator_field_group_flex wceazy_coupon_generator_coupon_type">
-                    <label class="wceazy_coupon_generator_select2_label" style="color: #FF521D;"><?php esc_html_e('Coupon Type', 'wceazy'); ?> <span >(Pro)</span></label>
+                    <label class="wceazy_coupon_generator_select2_label">
+                            <?php esc_html_e('Coupon Type', 'wceazy'); ?> 
+                            <span style="color: #FF521D;" ><?php esc_html_e('(Pro)', 'wceazy'); ?> 
+                        </span>
+                   </label>
+                   
                     <select class="wceazy_coupon_generator_select_field">
                         <option value=""><?php esc_html_e('Please select', 'wceazy'); ?></option>
                         <option value="char"><?php esc_html_e('Characters', 'wceazy'); ?></option>
@@ -81,7 +86,7 @@
                                     <option value="fixed_cart"><?php esc_html_e('Fixed cart discount', 'wceazy'); ?></option>
                                     <option value="fixed_product"><?php esc_html_e('Fixed product discount', 'wceazy'); ?></option>
                                 </select>
-                                <small><?php esc_html_e('Choose the discount amount for this deal.', 'wceazy'); ?></small>
+                                <small><?php esc_html_e('Choose the specific discount type.', 'wceazy'); ?></small>
                             </div>
 
                             <div class="wceazy_coupon_generator_field_group wceazy_coupon_generator_coupon_amount">
@@ -209,7 +214,7 @@
         </form>
 
         <div class="wceazy_coupon_generator_bottom_button_section">
-            <button onclick="wceazy_submit_coupon_generator();"><?php esc_html_e('Generate Coupons', 'wceazy'); ?></button>
+            <button onclick="wceazy_submit_coupon_generator();"><?php esc_html_e('Save Settings', 'wceazy'); ?></button>
         </div>
 
 
@@ -226,7 +231,7 @@
             <img src="<?php echo WCEAZY_IMG_DIR . 'modules/coupon_generator/popup_spinner.svg' ?>" alt="">
         </div>
         <div class="successes_message">
-            <p><span class="coupon_count"></span> <?php esc_html_e('Coupons Generated <br />Successfully!', 'wceazy'); ?></p>
+            <p><span class="coupon_count"></span> <?php esc_html_e('Coupons Generated Successfully!', 'wceazy'); ?></p>
             <button class="wceazy_coupon_generator_popup_export_btn"><?php esc_html_e('Export as CSV', 'wceazy'); ?></button>
             <button class="wceazy_close_popup" onclick="wceazy_coupon_generator_close_popup();"></button>
         </div>

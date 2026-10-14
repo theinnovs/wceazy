@@ -23,7 +23,11 @@ if (!class_exists ('WcEazyAutoApplyCouponClient')) {
             $this->utils = new WcEazyAutoApplyCouponUtils($this->base_admin, $this->module_admin);
 
 
-            add_filter('woocommerce_before_cart', array($this->utils, 'apply_coupon_automatically'));
+            // add_filter('woocommerce_before_cart', array($this->utils, 'apply_coupon_automatically'));
+            add_action('woocommerce_before_cart', array($this->utils, 'apply_coupon_automatically'), 20);
+            add_action('woocommerce_before_checkout_form', array($this->utils, 'apply_coupon_automatically'), 20);
+            add_action('woocommerce_cart_loaded_from_session', array($this->utils, 'apply_coupon_automatically'), 20);
+
             add_action('woocommerce_thankyou', array( $this->utils, 'wceazy_session_unset'), 10, 1);
 
         }

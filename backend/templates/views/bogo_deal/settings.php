@@ -16,7 +16,7 @@
         <div class="page_title_part_left">
             <h2><?php esc_html_e('BOGO Deal', 'wceazy'); ?></h2>
             
-            <a target="_blank" href="<?php echo WCEAZY_DOCS_PAGE; ?>" <?php esc_html_e('Documentation', 'wceazy'); ?></a>
+            <a target="_blank" href="<?php echo WCEAZY_DOCS_PAGE; ?>"> <?php esc_html_e('Documentation', 'wceazy'); ?></a>
         </div>
         <div class="page_title_part_right">
             <button class="wceazy_bogo_deal_back_to_dashboard_btn" onclick="wceazy_modules_page_init(`<?php echo esc_url(WCEAZY_URL); ?>`)"><?php esc_html_e('Back to all Modules', 'wceazy'); ?></button>

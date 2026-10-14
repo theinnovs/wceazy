@@ -102,39 +102,125 @@ if (!class_exists ('WcEazyAutoApplyCouponUtils')) {
         }
 
 
-        public function apply_coupon_automatically()
-        {
-            if (!class_exists ('WooCommerce')) {
+        // public function apply_coupon_automatically(){
+        //     if (!class_exists ('WooCommerce')) {
+        //         return;
+        //     }
+        //     global $woocommerce;
+        //     // get auto apply coupon list
+        //     $auto_apply_coupons = get_option ('wceazy_auto_apply_coupons');
+
+        //     $url_coupon_id = ( isset( $_SESSION['url_coupon_id'] ) && !empty( $_SESSION['url_coupon_id'] ) ) ? $_SESSION['url_coupon_id'] : '';
+        //     $url_coupon_force_apply = 'no';
+
+        //     if( !empty( $url_coupon_id ) ){
+        //         $url_coupon_force_apply = get_post_meta ($url_coupon_id, 'wceazy_force_apply_url_coupon', true) ? get_post_meta ($url_coupon_id, 'wceazy_force_apply_url_coupon', true) : 'no';
+        //     }
+
+        //     // generate new auto apply coupon data for
+        //     if (!empty($auto_apply_coupons) && $url_coupon_force_apply !== 'yes') {
+        //         foreach ($auto_apply_coupons as $key => $coupon) {
+        //             $coupon_code = $coupon['coupon_code'];
+        //             $coupon = new \WC_Coupon($coupon_code);
+        //             $discounts = new \WC_Discounts(WC ()->cart);
+        //             $valid_response = $discounts->is_coupon_valid ($coupon);
+
+        //             if (!is_wp_error ($valid_response)) {
+        //                 // add discount if not exits
+        //                 if (!$woocommerce->cart->has_discount (sanitize_text_field ($coupon_code))) {
+        //                     $woocommerce->cart->add_discount (sanitize_text_field ($coupon_code));
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        // }
+
+        public function apply_coupon_automatically(){
+
+            if (!class_exists('WooCommerce')) {
                 return;
             }
-            global $woocommerce;
-            // get auto apply coupon list
-            $auto_apply_coupons = get_option ('wceazy_auto_apply_coupons');
 
-            $url_coupon_id = ( isset( $_SESSION['url_coupon_id'] ) && !empty( $_SESSION['url_coupon_id'] ) ) ? $_SESSION['url_coupon_id'] : '';
-            $url_coupon_force_apply = 'no';
-
-            if( !empty( $url_coupon_id ) ){
-                $url_coupon_force_apply = get_post_meta ($url_coupon_id, 'wceazy_force_apply_url_coupon', true) ? get_post_meta ($url_coupon_id, 'wceazy_force_apply_url_coupon', true) : 'no';
+            if (!WC()->cart) {
+                return;
             }
 
-            // generate new auto apply coupon data for
-            if (!empty($auto_apply_coupons) && $url_coupon_force_apply !== 'yes') {
-                foreach ($auto_apply_coupons as $key => $coupon) {
-                    $coupon_code = $coupon['coupon_code'];
-                    $coupon = new \WC_Coupon($coupon_code);
-                    $discounts = new \WC_Discounts(WC ()->cart);
-                    $valid_response = $discounts->is_coupon_valid ($coupon);
+            // Get auto apply coupon list
+            $auto_apply_coupons = get_option('wceazy_auto_apply_coupons');
 
-                    if (!is_wp_error ($valid_response)) {
-                        // add discount if not exits
-                        if (!$woocommerce->cart->has_discount (sanitize_text_field ($coupon_code))) {
-                            $woocommerce->cart->add_discount (sanitize_text_field ($coupon_code));
-                        }
-                    }
+            if (empty($auto_apply_coupons) || !is_array($auto_apply_coupons)) {
+                return;
+            }
+
+            // URL coupon force apply logic
+            $url_coupon_id = (
+                isset($_SESSION['url_coupon_id']) &&
+                !empty($_SESSION['url_coupon_id'])
+            ) ? $_SESSION['url_coupon_id'] : '';
+
+            $url_coupon_force_apply = 'no';
+
+            if (!empty($url_coupon_id)) {
+                $url_coupon_force_apply = get_post_meta(
+                    $url_coupon_id,
+                    'wceazy_force_apply_url_coupon',
+                    true
+                );
+
+                if (empty($url_coupon_force_apply)) {
+                    $url_coupon_force_apply = 'no';
                 }
             }
 
+            // Do not auto apply when URL coupon is forced
+            if ($url_coupon_force_apply === 'yes') {
+                return;
+            }
+
+            foreach ($auto_apply_coupons as $coupon_data) {
+
+                if (
+                    empty($coupon_data['coupon_code']) ||
+                    !is_string($coupon_data['coupon_code'])
+                ) {
+                    continue;
+                }
+
+                $coupon_code = sanitize_text_field($coupon_data['coupon_code']);
+
+                // Already applied?
+                if (WC()->cart->has_discount($coupon_code)) {
+                    continue;
+                }
+
+                // Load WooCommerce coupon
+                $coupon = new \WC_Coupon($coupon_code);
+
+                if (!$coupon->get_id()) {
+                    continue;
+                }
+
+                /*
+                * Let WooCommerce validate the coupon.
+                * This keeps percentage, fixed cart, fixed product,
+                * product restrictions, excluded products, minimum amount,
+                * expiry, usage limits, etc. under WooCommerce's own rules.
+                */
+                $discounts = new \WC_Discounts(WC()->cart);
+
+                $valid_response = $discounts->is_coupon_valid($coupon);
+
+                if (is_wp_error($valid_response)) {
+                    continue;
+                }
+
+                /*
+                * Apply the actual WooCommerce coupon.
+                * Do NOT calculate the discount manually.
+                */
+                WC()->cart->apply_coupon($coupon_code);
+            }
         }
 
 

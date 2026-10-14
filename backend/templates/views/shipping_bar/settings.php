@@ -61,7 +61,7 @@ $wceazy_sb_progress_border_radius = isset($wceazy_sb_settings["progress_border_r
             <p>wcEazy <span><?php echo esc_attr(WCEAZY_VERSION); ?></span></p>
         </div>
         <div class="wceazy_header_part_right">
-            <a class="wceazy_get_pro" target="_blank" href="<?php echo WCEAZY_GET_PRO_URL; ?>">GET PRO</a>
+            <a class="wceazy_get_pro" target="_blank" href="<?php echo WCEAZY_GET_PRO_URL; ?>"><?php esc_html_e('GET PRO', 'wceazy'); ?></a>
         </div>
     </div>
 
@@ -69,11 +69,11 @@ $wceazy_sb_progress_border_radius = isset($wceazy_sb_settings["progress_border_r
 
     <div class="wceazy_shipping_bar_page_title">
         <div class="page_title_part_left">
-            <h2>Free Shipping Bar</h2>
-            <a target="_blank" href="<?php echo WCEAZY_DOCS_PAGE; ?>">Documentation</a>
+            <h2><?php esc_html_e('Free Shipping Bar', 'wceazy'); ?></h2>
+            <a target="_blank" href="<?php echo WCEAZY_DOCS_PAGE; ?>"><?php esc_html_e('Documentation', 'wceazy'); ?></a>
         </div>
         <div class="page_title_part_right">
-            <button class="wceazy_shipping_bar_back_to_dashboard_btn" onclick="wceazy_modules_page_init(`<?php echo esc_url(WCEAZY_URL); ?>`)">Back to all Modules</button>
+            <button class="wceazy_shipping_bar_back_to_dashboard_btn" onclick="wceazy_modules_page_init(`<?php echo esc_url(WCEAZY_URL); ?>`)"><?php esc_html_e('Back to all Modules', 'wceazy'); ?></button>
         </div>
     </div>
 
@@ -86,19 +86,19 @@ $wceazy_sb_progress_border_radius = isset($wceazy_sb_settings["progress_border_r
             <div class="wceazy_shipping_bar_tab_part_left">
                 <div class="coupon_data_tabs">
                     <div class="tab_item tab_item_active" data-target="tab_general">
-                        <h1>General</h1>
+                        <h1><?php esc_html_e('General', 'wceazy'); ?></h1>
                     </div>
                     <div class="tab_item" data-target="tab_cart_and_checkout">
-                        <h1>Cart & Checkout</h1>
+                        <h1><?php esc_html_e('Cart & Checkout', 'wceazy'); ?></h1>
                     </div>
                     <div class="tab_item" data-target="tab_messages">
-                        <h1>Messages</h1>
+                        <h1><?php esc_html_e('Messages', 'wceazy'); ?></h1>
                     </div>
                     <div class="tab_item" data-target="tab_effect">
-                        <h1>Effect</h1>
+                        <h1><?php esc_html_e('Effect', 'wceazy'); ?></h1>
                     </div>
                     <div class="tab_item" data-target="tab_style">
-                        <h1>Style</h1>
+                        <h1><?php esc_html_e('Style', 'wceazy'); ?></h1>
                     </div>
                 </div>
             </div>
@@ -107,14 +107,14 @@ $wceazy_sb_progress_border_radius = isset($wceazy_sb_settings["progress_border_r
 
                 <div class="coupon_tab_body" data-id="tab_general">
                     <div class="tab_body_title">
-                        <h1>General Settings</h1>
+                        <h1><?php esc_html_e('General Settings', 'wceazy'); ?></h1>
                     </div>
                     <div class="tab_body_form">
 
 
 
                         <div class="wceazy_shipping_bar_field_group wceazy_shipping_bar_enable_shipping_bar">
-                            <label for="coupon_generator_coupon_amount">Enable Shipping Bar</label>
+                            <label for="coupon_generator_coupon_amount"><?php esc_html_e('Enable Shipping Bar', 'wceazy'); ?></label>
                             <div class="field_with_msg_container">
                                 <label class="toggle_switch"><input type="checkbox" <?php echo esc_attr($wceazy_sb_enable_shipping_bar == "yes" ? "checked" : ""); ?>><span class="slider round"></span></label>
                                 <small><?php esc_html_e('Turn ON the switch to enable the Shipping Bar.', 'wceazy'); ?></small>
